@@ -1,0 +1,43 @@
+project.ext {
+    androidSupportVersion = "23.1.0"
+    butterknifeVersion = "8.4.0"
+    rxAndroidVersion = "1.2.0"
+    rxjavaVersion = "1.1.5"
+}
+
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "24.0.3"
+
+    defaultConfig {
+        applicationId "com.elegantsolutions.hieroglyphic.gift"
+        minSdkVersion 9
+        targetSdkVersion 23
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
+        }
+    }
+}
+
+dependencies {
+    compile 'com.android.support:appcompat-v7:23.1.0'
+    compile 'com.android.support:design:23.1.0'
+    compile "com.android.support:support-v4:23.1.0"
+
+    compile 'com.google.android.gms:play-services-ads:+'
+    compile "com.jakewharton:butterknife:$project.butterknifeVersion"
+
+    // Rx Android support
+    compile "io.reactivex:rxandroid:$project.rxAndroidVersion"
+    compile "io.reactivex:rxjava:$project.rxjavaVersion"
+
+    annotationProcessor "com.jakewharton:butterknife-compiler:$project.butterknifeVersion"
+
+    compile files('libs/libGoogleAnalyticsServices.jar')
+}

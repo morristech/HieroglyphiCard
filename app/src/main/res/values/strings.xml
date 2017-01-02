@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Hieroglyphic Gift</string>
+    <string name="name_message">Your English Name</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="include_photo">Personal Photo</string>
+    <string name="add_photo">Add Your Photo</string>
+    <string name="create_card">Get your Card</string>
+    <string name="pick_photo">Pick a photo</string>
+    <string name="from_camera">From Camera</string>
+    <string name="from_gallery">From Gallery</string>
+    <string name="selected_photo">Selected Photo</string>
+    <string name="title_activity_card">Hieroglyphic Card</string> 
+    <string name="image_desc">Click the image below to select your Photo</string>
+    <string name="menu_Rate_app">Rate this app</string>
+	<string name="error_no_google_play">Google Play is not currently available</string>
+    <string name="loading_message">Loading</string>
+    <string name="please_wait_message">Please wait &#8230;</string>
+    <string name="remote_files_not_supported_message">Remote files are not currently supported. Choose a local file instead.</string>
+    <string name="name_should_be_english_message">Your name should contain only English characters</string>
+    <string name="enter_name_message">Enter your name</string>
+    <string name="procedure_message">Use settings to explore options. Press the back button to enter a new name</string>
+    <string name="error_message">Could not perform this operation. please try again later.</string>
+    <string name="share_image_message">Share Image</string>
+    <string name="done_successfully_message">Done successfully</string>
+    <string name="hieroglyphic_name_share_message">My Hieroglyphic Name</string>
+    <string name="checkout_name_message">Check out my name in Hieroglyph</string>
+    <string name="cannot_find_facebook_app">Make sure that Facebook app is installed to be able to share</string>
+    <string name="cannot_find_twitter_app">Make sure that Twitter app is installed to be able to share</string>
+    <string name="cannot_find_gplus_app">Make sure that Google Plus app is installed to be able to share</string>
+    <string name="cannot_find_gmail_app">Make sure that Google Mail app is installed to be able to share</string>
+    <string name="image_saved_app">Image is saved in: </string>
+    <string name="cannot_save_card_error_message">Could not save your Pharaoh card on your device</string>
+</resources>
