@@ -1,7 +1,0 @@
-#Mon Jan 02 22:03:03 EET 2017
-base.0=/Users/hazemsaleh/Documents/Hazem/Code/NewHieroglyphiCard/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_0a15c27c25b4d7a97f0a67889a4dea6f0973f86e
-renamed.1=classes2.dex
-renamed.0=classes.dex
-file.1=/Users/hazemsaleh/Documents/Hazem/Code/NewHieroglyphiCard/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_4d1d7c072e1ce30e19d990e9f67f6060877b5102/classes.dex
-base.1=/Users/hazemsaleh/Documents/Hazem/Code/NewHieroglyphiCard/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_4d1d7c072e1ce30e19d990e9f67f6060877b5102
-file.0=/Users/hazemsaleh/Documents/Hazem/Code/NewHieroglyphiCard/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_0a15c27c25b4d7a97f0a67889a4dea6f0973f86e/classes.dex

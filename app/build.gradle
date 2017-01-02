@@ -30,7 +30,7 @@ dependencies {
     compile 'com.android.support:design:23.1.0'
     compile "com.android.support:support-v4:23.1.0"
 
-    compile 'com.google.android.gms:play-services-ads:+'
+    compile 'com.google.android.gms:play-services-ads:10.0.0'
     compile "com.jakewharton:butterknife:$project.butterknifeVersion"
 
     // Rx Android support

@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">Hieroglyphic Gift</string>
     <string name="name_message">Your English Name</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="include_photo">Personal Photo</string>
     <string name="add_photo">Add Your Photo</string>
-    <string name="create_card">Get your Card</string>
+    <string name="create_card">View Card</string>
     <string name="pick_photo">Pick a photo</string>
     <string name="from_camera">From Camera</string>
     <string name="from_gallery">From Gallery</string>
     <string name="selected_photo">Selected Photo</string>
-    <string name="title_activity_card">Hieroglyphic Card</string> 
+    <string name="title_activity_card">Enjoy your Card</string>
     <string name="image_desc">Click the image below to select your Photo</string>
     <string name="menu_Rate_app">Rate this app</string>
 	<string name="error_no_google_play">Google Play is not currently available</string>
@@ -33,4 +32,10 @@
     <string name="cannot_find_gmail_app">Make sure that Google Mail app is installed to be able to share</string>
     <string name="image_saved_app">Image is saved in: </string>
     <string name="cannot_save_card_error_message">Could not save your Pharaoh card on your device</string>
+    <string name="save_in_pictures">Save in pictures</string>
+    <string name="share_on_facebook">Share on Facebook</string>
+    <string name="share_on_twitter">Share on Twitter</string>
+    <string name="share_on_google">Share on Google+</string>
+    <string name="send_to_a_friend">Send to a friend</string>
+    <string name="rate_this_app">Rate this app</string>
 </resources>

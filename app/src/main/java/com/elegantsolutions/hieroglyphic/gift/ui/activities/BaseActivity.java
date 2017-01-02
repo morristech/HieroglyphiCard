@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -43,7 +44,7 @@ import java.util.concurrent.Callable;
 
 import rx.Observable;
 
-public class BaseActivity extends Activity {
+public class BaseActivity extends ActionBarActivity {
     private static final String TAG = BaseActivity.class.getSimpleName();
     private AdView adView;
     private ProgressDialog dialog;
@@ -225,7 +226,7 @@ public class BaseActivity extends Activity {
     }
 
     protected void requestFullScreenWindow() {
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 

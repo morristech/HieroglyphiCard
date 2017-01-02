@@ -1,6 +1,8 @@
 package com.elegantsolutions.hieroglyphic.gift.ui.helper;
 
 import android.Manifest;
+import android.annotation.TargetApi;
+import android.os.Build;
 
 public interface Actions {
 
@@ -24,6 +26,7 @@ public interface Actions {
         String USER_NAME = "userName";
     }
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     interface Permission {
         String[] READ_WRITE_EXTERNAL_STORAGE = {
                 Manifest.permission.READ_EXTERNAL_STORAGE,

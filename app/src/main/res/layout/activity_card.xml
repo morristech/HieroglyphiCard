@@ -27,7 +27,7 @@
 		    	android:contentDescription="@string/selected_photo"/>       
 		    	
 		    <ImageView
-		        android:layout_marginTop="20dp"
+		        android:layout_marginTop="10dp"
                 android:id="@+id/heroView"
                 android:layout_height="wrap_content"
                 android:layout_width="fill_parent"
@@ -37,7 +37,7 @@
 		    	android:contentDescription="@string/selected_photo"/>
 		    	
 			<TextView
-		        android:layout_marginTop="20dp" 
+		        android:layout_marginTop="10dp"
         		android:id="@+id/userNameView"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
