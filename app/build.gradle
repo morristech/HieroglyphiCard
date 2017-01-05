@@ -18,6 +18,8 @@ android {
         applicationId "com.elegantsolutions.hieroglyphic.gift"
         minSdkVersion 9
         targetSdkVersion 23
+        buildConfigField 'String', 'ADS_UNIT_ID', "\"ca-app-pub-0108392760264860/3222269898\""
+        buildConfigField 'boolean', 'ENABLE_EMULATOR_TEST_ADS', "false"
     }
 
     buildTypes {

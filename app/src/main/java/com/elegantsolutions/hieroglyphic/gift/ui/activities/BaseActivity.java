@@ -27,6 +27,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.elegantsolutions.hieroglyphic.gift.BuildConfig;
 import com.elegantsolutions.hieroglyphic.gift.R;
 import com.elegantsolutions.hieroglyphic.gift.di.HieroApplication;
 import com.elegantsolutions.hieroglyphic.gift.service.BitmapManager;
@@ -118,7 +119,9 @@ public class BaseActivity extends ActionBarActivity {
 
     protected void setupAdvertisement() {
         adView = new AdView(this);
-        adView.setAdUnitId("ca-app-pub-0108392760264860/3222269898");
+
+        // Ads configs
+        adView.setAdUnitId(BuildConfig.ADS_UNIT_ID);
         adView.setAdSize(AdSize.BANNER);
 
         // Lookup your LinearLayout assuming it's been given
@@ -129,12 +132,19 @@ public class BaseActivity extends ActionBarActivity {
         layout.addView(adView, 0);
 
         // Initiate a generic request.
-        AdRequest adRequest = new AdRequest.Builder()
-                //TODO uncomment two lines
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)       // Emulator
-                //.addTestDevice("B3EEABB8EE11C2BE770B684D95219ECB") // My Galaxy Nexus test phone
-                .build();
+        AdRequest adRequest;
 
+        if (BuildConfig.ENABLE_EMULATOR_TEST_ADS) {
+            adRequest = new AdRequest.Builder()
+                    .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                    .build();
+        } else {
+            adRequest = new AdRequest.Builder().build();
+        }
+
+        //TODO uncomment two lines
+        //.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)       // Emulator
+        //.addTestDevice("B3EEABB8EE11C2BE770B684D95219ECB") // My Galaxy Nexus test phone
         // Load the adView with the ad request.
         adView.loadAd(adRequest);
     }
