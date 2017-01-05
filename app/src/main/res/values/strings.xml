@@ -38,4 +38,5 @@
     <string name="share_on_google">Share on Google+</string>
     <string name="send_to_a_friend">Send to a friend</string>
     <string name="rate_this_app">Rate this app</string>
+    <string name="container_menu">Container Menu</string>
 </resources>

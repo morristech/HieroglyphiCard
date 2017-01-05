@@ -12,11 +12,12 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.elegantsolutions.hieroglyphic.gift.R;
-import com.elegantsolutions.hieroglyphic.gift.service.GalleryManager;
-import com.elegantsolutions.hieroglyphic.gift.service.ImageManager;
+import com.elegantsolutions.hieroglyphic.gift.di.HieroApplication;
 import com.elegantsolutions.hieroglyphic.gift.service.ShareManager;
 import com.elegantsolutions.hieroglyphic.gift.ui.helper.Actions;
 import com.elegantsolutions.hieroglyphic.gift.ui.helper.ShareOptions;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,13 +33,19 @@ public class CardActivity extends BaseActivity {
     private String currentImageName;
     private int operationID;
 
+    @Inject
+    ShareManager shareManager;
+
     @BindView(R.id.userNameView)
     TextView userNameField;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-        //requestFullScreenWindow();
+
+        //inject dependencies
+        ((HieroApplication) getApplication()).getAppComponent().inject(this);
+
         setContentView(R.layout.activity_card);
 
         ButterKnife.bind(this);
@@ -138,7 +145,7 @@ public class CardActivity extends BaseActivity {
                     }
 
                 } else {
-                    Log.d(TAG, "Storage Permission denied ...");
+                    Log.d(TAG, "Storage Permission denied");
                 }
                 return;
             }
@@ -191,9 +198,9 @@ public class CardActivity extends BaseActivity {
                         currentImageName = imageName;
 
                         // Lookup for apps to use for share
-                        Intent intent = ShareManager.getInstance().getShareIntent(CardActivity.this,
+                        Intent intent = shareManager.getShareIntent(CardActivity.this,
                                 type,
-                                GalleryManager.getInstance().getAppGalleryPath() + currentImageName);
+                                galleryManager.getAppGalleryPath() + currentImageName);
 
                         if (intent == null) {
                             showSharingErrorMessage(type);
@@ -212,7 +219,7 @@ public class CardActivity extends BaseActivity {
     private void saveInGallery() {
 		if (currentImageName != null) {
 			showShortMessage(getString(R.string.image_saved_app) +
-                    GalleryManager.getInstance().getAppGalleryPath() + currentImageName);
+                    galleryManager.getAppGalleryPath() + currentImageName);
 			return;
 		}
 
@@ -243,7 +250,7 @@ public class CardActivity extends BaseActivity {
                         currentImageName = imageName;
 
                         showLongMessage(getString(R.string.image_saved_app) +
-                                GalleryManager.getInstance().getAppGalleryPath() +
+                                galleryManager.getAppGalleryPath() +
                                 currentImageName);
                     }
                 });
@@ -257,7 +264,7 @@ public class CardActivity extends BaseActivity {
 
         // Display user image
         if (photoPath != null) {
-            ImageManager.getInstance().showImage(this, R.id.photoView, photoPath);
+            imageManager.showImage(this, R.id.photoView, photoPath);
         }
 
         // Display Hero characters

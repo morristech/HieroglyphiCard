@@ -2,38 +2,47 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/save_in_gallery"
-        android:orderInCategory="100"
-        app:showAsAction="never"
-        android:title="@string/save_in_pictures"/>
-        
-    <item
-        android:id="@+id/share_on_fb"
-        android:orderInCategory="100"
-        app:showAsAction="never"
-        android:title="@string/share_on_facebook"/>
-    
-    <item
-       android:id="@+id/share_on_twitter"
-       android:orderInCategory="100"
-        app:showAsAction="never"
-       android:title="@string/share_on_twitter"/>
-     
-    <item
-       android:id="@+id/share_on_google_plus"
-       android:orderInCategory="100"
-        app:showAsAction="never"
-       android:title="@string/share_on_google"/>
-        
-    <item
-       android:id="@+id/send_to_friend"
-       android:orderInCategory="100"
-        app:showAsAction="never"
-       android:title="@string/send_to_a_friend"/>
-     
- 	<item android:id="@+id/rate_App" 
-       android:orderInCategory="100"
-        app:showAsAction="never"
-       android:title="@string/rate_this_app"/>
+        android:id="@+id/menu_overflow"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_action_overflow"
+        android:title="@string/container_menu">
+
+        <menu>
+            <item
+                android:id="@+id/save_in_gallery"
+                android:orderInCategory="100"
+                app:showAsAction="never"
+                android:title="@string/save_in_pictures"/>
+
+            <item
+                android:id="@+id/share_on_fb"
+                android:orderInCategory="100"
+                app:showAsAction="never"
+                android:title="@string/share_on_facebook"/>
+
+            <item
+               android:id="@+id/share_on_twitter"
+               android:orderInCategory="100"
+                app:showAsAction="never"
+               android:title="@string/share_on_twitter"/>
+
+            <item
+               android:id="@+id/share_on_google_plus"
+               android:orderInCategory="100"
+                app:showAsAction="never"
+               android:title="@string/share_on_google"/>
+
+            <item
+               android:id="@+id/send_to_friend"
+               android:orderInCategory="100"
+                app:showAsAction="never"
+               android:title="@string/send_to_a_friend"/>
+
+            <item android:id="@+id/rate_App"
+               android:orderInCategory="100"
+                app:showAsAction="never"
+               android:title="@string/rate_this_app"/>
+        </menu>
+    </item>
 
 </menu>

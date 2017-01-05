@@ -5,4 +5,6 @@
 
     <!-- Dimensions -->
     <dimen name="text_size_very_large">30sp</dimen>
+    <dimen name="text_size_large">20sp</dimen>
+    <dimen name="text_size_medium">15sp</dimen>
 </resources>

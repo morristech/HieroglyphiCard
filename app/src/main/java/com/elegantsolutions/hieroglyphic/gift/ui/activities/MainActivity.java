@@ -15,19 +15,27 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.elegantsolutions.hieroglyphic.gift.R;
-import com.elegantsolutions.hieroglyphic.gift.service.GalleryManager;
+import com.elegantsolutions.hieroglyphic.gift.di.HieroApplication;
 import com.elegantsolutions.hieroglyphic.gift.service.HieroManager;
 import com.elegantsolutions.hieroglyphic.gift.ui.helper.Actions;
 
 import java.io.File;
 import java.io.IOException;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.elegantsolutions.hieroglyphic.gift.R.id.userName;
+
 public class MainActivity extends BaseActivity {
+    private static final String TAG = MainActivity.class.getSimpleName();
     private String photoPath;
+
+    @Inject
+    HieroManager hieroManager;
 
     @BindView(R.id.createCard)
     Button createCard;
@@ -35,7 +43,7 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.cardPhoto)
     ImageView cardPhoto;
 
-    @BindView(R.id.userName)
+    @BindView(userName)
     EditText userNameField;
 
     @Override
@@ -44,11 +52,15 @@ public class MainActivity extends BaseActivity {
 
         super.onCreate(savedInstanceState);
 
+        //inject dependencies
+        ((HieroApplication) getApplication()).getAppComponent().inject(this);
+
         setContentView(R.layout.activity_main);
 
         ButterKnife.bind(this);
 
-        GalleryManager.getInstance().createAppGalleryDirectory();
+        galleryManager.createAppGalleryDirectory();
+
         setupAdvertisement();
 
         registerHideSoftKeyboardEvent(getWindow().getDecorView().getRootView(), this);
@@ -61,6 +73,8 @@ public class MainActivity extends BaseActivity {
 
     @OnClick(R.id.createCard)
     public void onCreateCard() {
+        System.out.println("onCreateCard() clicked ...");
+
         String userName = userNameField.getText().toString().trim();
 
         if (TextUtils.isEmpty(userName)) {
@@ -68,7 +82,7 @@ public class MainActivity extends BaseActivity {
             return;
         }
 
-        if (! HieroManager.getInstance().isValidEnglishName(userName)) {
+        if (! hieroManager.isValidEnglishName(userName)) {
             Toast.makeText(MainActivity.this, R.string.name_should_be_english_message, Toast.LENGTH_SHORT).show();
             return;
         }
@@ -99,7 +113,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void pickPhotoFromCamera() {
-        photoPath = GalleryManager.getInstance().getGalleryPath() + System.currentTimeMillis() + ".jpg";
+        photoPath = galleryManager.getGalleryPath() + System.currentTimeMillis() + ".jpg";
 
         if(Build.VERSION.SDK_INT >= 23) {
             requestPermission(this, Actions.Permission.READ_WRITE_EXTERNAL_STORAGE, Actions.Request.EXTERNAL_STORAGE);
@@ -110,15 +124,15 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        System.out.println("Inside onRequestPermissionsResult(). request code = " + requestCode);
+        Log.d(TAG, "Inside onRequestPermissionsResult(). request code = " + requestCode);
 
         switch (requestCode) {
             case Actions.Request.EXTERNAL_STORAGE: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    System.out.println("Storage Permission granted. Requesting Camera Permission");
+                    Log.d(TAG, "Storage Permission granted. Requesting Camera Permission");
                     requestPermission(this, Actions.Permission.CAMERA, Actions.Request.CAMERA_ACCESS);
                 } else {
-                    System.out.println("Storage Permission denied ...");
+                    Log.d(TAG, "Storage Permission denied");
                 }
                 return;
             }
@@ -127,7 +141,7 @@ public class MainActivity extends BaseActivity {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     captureImage();
                 } else {
-                    System.out.println("Camera Permission denied ...");
+                    Log.d(TAG, "Camera Permission denied");
                 }
         }
     }
@@ -153,7 +167,7 @@ public class MainActivity extends BaseActivity {
 	protected void onRestoreInstanceState(Bundle savedInstanceState) {		
 		super.onRestoreInstanceState(savedInstanceState);
 		
-		photoPath = savedInstanceState.getString("photoPath");
+		photoPath = savedInstanceState.getString(Actions.Param.PHOTO_PATH);
 		
 		if (photoPath != null) {
             showImage(R.id.cardPhoto, photoPath);
@@ -165,7 +179,7 @@ public class MainActivity extends BaseActivity {
 		super.onSaveInstanceState(outState);
 		
 		if (photoPath != null) {
-			outState.putString("photoPath", photoPath);		
+			outState.putString(Actions.Param.PHOTO_PATH, photoPath);
 		}
 	}
 
@@ -185,7 +199,7 @@ public class MainActivity extends BaseActivity {
             return;
         }
 
-        System.out.println("Camera Permission granted ...");
+        Log.d(TAG, "Camera Permission granted");
 
         Uri outputFileUri = Uri.fromFile(photoFile);
 

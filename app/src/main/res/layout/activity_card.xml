@@ -45,7 +45,6 @@
                 android:layout_height="wrap_content"
                 android:layout_width="fill_parent" 
                 android:gravity="center" />
-
         </LinearLayout>
 
     </ScrollView>

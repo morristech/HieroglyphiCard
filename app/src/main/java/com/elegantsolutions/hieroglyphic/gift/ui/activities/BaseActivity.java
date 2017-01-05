@@ -10,6 +10,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -27,6 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.elegantsolutions.hieroglyphic.gift.R;
+import com.elegantsolutions.hieroglyphic.gift.di.HieroApplication;
 import com.elegantsolutions.hieroglyphic.gift.service.BitmapManager;
 import com.elegantsolutions.hieroglyphic.gift.service.GalleryManager;
 import com.elegantsolutions.hieroglyphic.gift.service.HieroManager;
@@ -42,12 +44,37 @@ import com.google.android.gms.ads.AdView;
 import java.util.List;
 import java.util.concurrent.Callable;
 
+import javax.inject.Inject;
+
 import rx.Observable;
 
 public class BaseActivity extends ActionBarActivity {
     private static final String TAG = BaseActivity.class.getSimpleName();
     private AdView adView;
     private ProgressDialog dialog;
+
+    @Inject
+    ImageManager imageManager;
+
+    @Inject
+    BitmapManager bitmapManager;
+
+    @Inject
+    GalleryManager galleryManager;
+
+    @Inject
+    ProgressManager progressManager;
+
+    @Inject
+    HieroManager hieroManager;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        //inject dependencies
+        ((HieroApplication) getApplication()).getAppComponent().inject(this);
+    }
 
     @Override
     protected void onStart() {
@@ -113,8 +140,9 @@ public class BaseActivity extends ActionBarActivity {
     }
 
     protected void requestPermission(Activity activity, String[] permissions, int requestCode) {
-        Log.d(TAG, "Before requestPermission()!!!");
-        //TODO use checkselfpermission output
+        Log.d(TAG, "Inside requestPermission()");
+
+        //TODO use checkselfpermission result
         for (String permission : permissions) {
             ContextCompat.checkSelfPermission(this, permission);
         }
@@ -186,17 +214,17 @@ public class BaseActivity extends ActionBarActivity {
     }
 
     protected void showImage(int ID, String photoPath) {
-        ImageManager.getInstance().showImage(this, ID, photoPath);
+        imageManager.showImage(this, ID, photoPath);
     }
 
     protected void showImage(int ID, Bitmap bitmap) {
-        ImageManager.getInstance().showImage(this, ID, bitmap);
+        imageManager.showImage(this, ID, bitmap);
     }
 
     protected Bitmap convertNameToHieroBitmap(String userName) {
         Bitmap completeHieroName;
         Bitmap[] wordBitmaps;
-        List<int[]> userNameHiero = HieroManager.getInstance().convertEnglishNameToHiero(userName);
+        List<int[]> userNameHiero = hieroManager.convertEnglishNameToHiero(userName);
 
         wordBitmaps = new Bitmap[userNameHiero.size()];
 
@@ -206,14 +234,14 @@ public class BaseActivity extends ActionBarActivity {
             Bitmap[] bitmaps = new Bitmap[word.length];
 
             for (int i = 0; i < bitmaps.length; ++i) {
-                bitmaps[i] = BitmapManager.getInstance().loadBitmap(this, word[i]);
+                bitmaps[i] = bitmapManager.loadBitmap(this, word[i]);
             }
 
-            Bitmap wordBitmap = BitmapManager.getInstance().augmentHorizontalBitmaps(bitmaps);
+            Bitmap wordBitmap = bitmapManager.augmentHorizontalBitmaps(bitmaps);
             wordBitmaps[j] = wordBitmap;
         }
 
-        completeHieroName = BitmapManager.getInstance().augmentVerticalBitmaps(wordBitmaps, 5);
+        completeHieroName = bitmapManager.augmentVerticalBitmaps(wordBitmaps, 5);
 
         return completeHieroName;
     }
@@ -254,12 +282,12 @@ public class BaseActivity extends ActionBarActivity {
     }
 
     protected void showBusyIndicator() {
-        dialog = ProgressManager.getInstance().startProgressDialog(this);
+        dialog = progressManager.startProgressDialog(this);
     }
 
     protected void hideBusyIndicator() {
         if (dialog != null) {
-            ProgressManager.getInstance().endProgressDialog(dialog);
+            progressManager.endProgressDialog(dialog);
         }
     }
 
@@ -295,9 +323,9 @@ public class BaseActivity extends ActionBarActivity {
                 if (currentImageName == null) {
                     newImageName = getUniqueImgName(userName);
 
-                    ImageManager.getInstance().saveViewAsPapyrusImage(sourceActivity,
+                    imageManager.saveViewAsPapyrusImage(sourceActivity,
                             scrollableViewID,
-                            GalleryManager.getInstance().getAppGalleryPath(), newImageName);
+                            galleryManager.getAppGalleryPath(), newImageName);
                 } else {
                     newImageName = currentImageName;
                 }
@@ -353,37 +381,4 @@ public class BaseActivity extends ActionBarActivity {
             }
         }
     }
-    //TODO migrate
-    /*
-    private void setViewAsWallpaper() {
-        showBusyIndicator();
-
-        Runnable runnable = new Runnable() {
-
-            @Override
-            public void run() {
-                String message = "";
-
-                try {
-                    ImageManager.getInstance().setViewAsWallpaper(CardActivity.this, R.id.ScrlCardView);
-                    message = "Card is successfully set as a wallpaper";
-                } catch (Exception exception) {
-                    Log.e(CardActivity.this.toString(), exception.getMessage());
-                    message = "Could not set your Pharaoh card in your wallpaper";
-                }
-
-                Message msg = new Message();
-                Bundle bundle = new Bundle();
-
-                bundle.putString("message", message);
-                msg.setData(bundle);
-
-                resultHandler.sendMessage(msg);
-            }
-        };
-
-        Thread thread = new Thread(runnable);
-        thread.start();
-    }
-    */
 }
