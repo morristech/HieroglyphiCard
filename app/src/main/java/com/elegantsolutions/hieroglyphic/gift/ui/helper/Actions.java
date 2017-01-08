@@ -19,6 +19,7 @@ public interface Actions {
     interface Request {
         int EXTERNAL_STORAGE = 1;
         int CAMERA_ACCESS = 2;
+        int FULL_CAMERA_STORAGE_ACCESS = 3;
     }
 
     interface Param {
@@ -34,6 +35,12 @@ public interface Actions {
         };
 
         String[] CAMERA = {
+                Manifest.permission.CAMERA
+        };
+
+        String[] FULL_CAMERA_STORAGE = {
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.CAMERA
         };
     }

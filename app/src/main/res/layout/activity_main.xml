@@ -29,9 +29,15 @@
 			 		    
 		    <ImageView 
 		        android:id="@+id/cardPhoto"
-		        android:layout_marginTop="10dp" 		
-                android:layout_height="wrap_content"
-                android:layout_width="fill_parent" 
+		        android:layout_marginTop="10dp"
+
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:scaleType="fitCenter"
+				android:adjustViewBounds="true"
+				android:layout_gravity="center"
+				android:gravity="center_horizontal"
+
 		    	android:src="@drawable/pharoah"
 		    	android:contentDescription="@string/selected_photo"/>        
 		

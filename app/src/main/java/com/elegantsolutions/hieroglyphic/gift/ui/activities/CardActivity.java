@@ -66,35 +66,34 @@ public class CardActivity extends BaseActivity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-        //TODO convert to actionbar
         switch (item.getItemId()) {
 	        case R.id.share_on_fb:
-                if(Build.VERSION.SDK_INT >= 23) {
-                    requestPermission(this, Actions.Permission.READ_WRITE_EXTERNAL_STORAGE, Actions.Request.EXTERNAL_STORAGE);
+                if(Build.VERSION.SDK_INT >= ANDROID_6) {
+                    requestPermissions(this, Actions.Permission.READ_WRITE_EXTERNAL_STORAGE, Actions.Request.EXTERNAL_STORAGE);
                     operationID = Actions.Application.SHARE_IMAGE_FB;
                 } else {
                     shareImage(ShareOptions.FACEBOOK);
                 }
 	            return true;
 	        case R.id.share_on_twitter:
-                if(Build.VERSION.SDK_INT >= 23) {
-                    requestPermission(this, Actions.Permission.READ_WRITE_EXTERNAL_STORAGE, Actions.Request.EXTERNAL_STORAGE);
+                if(Build.VERSION.SDK_INT >= ANDROID_6) {
+                    requestPermissions(this, Actions.Permission.READ_WRITE_EXTERNAL_STORAGE, Actions.Request.EXTERNAL_STORAGE);
                     operationID = Actions.Application.SHARE_IMAGE_TWITTER;
                 } else {
                     shareImage(ShareOptions.TWITTER);
                 }
 	            return true;
 	        case R.id.share_on_google_plus:
-                if(Build.VERSION.SDK_INT >= 23) {
-                    requestPermission(this, Actions.Permission.READ_WRITE_EXTERNAL_STORAGE, Actions.Request.EXTERNAL_STORAGE);
+                if(Build.VERSION.SDK_INT >= ANDROID_6) {
+                    requestPermissions(this, Actions.Permission.READ_WRITE_EXTERNAL_STORAGE, Actions.Request.EXTERNAL_STORAGE);
                     operationID = Actions.Application.SHARE_IMAGE_GPLUS;
                 } else {
                     shareImage(ShareOptions.GPLUS);
                 }
 	            return true;
 	        case R.id.send_to_friend:
-                if(Build.VERSION.SDK_INT >= 23) {
-                    requestPermission(this, Actions.Permission.READ_WRITE_EXTERNAL_STORAGE, Actions.Request.EXTERNAL_STORAGE);
+                if(Build.VERSION.SDK_INT >= ANDROID_6) {
+                    requestPermissions(this, Actions.Permission.READ_WRITE_EXTERNAL_STORAGE, Actions.Request.EXTERNAL_STORAGE);
                     operationID = Actions.Application.SHARE_IMAGE_EMAIL;
                 } else {
                     shareImage(ShareOptions.GMAIL);
@@ -104,8 +103,8 @@ public class CardActivity extends BaseActivity {
 	        //	setViewAsWallpaper();
 	        //	return true;
 	        case R.id.save_in_gallery:
-                if(Build.VERSION.SDK_INT >= 23) {
-                    requestPermission(this, Actions.Permission.READ_WRITE_EXTERNAL_STORAGE, Actions.Request.EXTERNAL_STORAGE);
+                if(Build.VERSION.SDK_INT >= ANDROID_6) {
+                    requestPermissions(this, Actions.Permission.READ_WRITE_EXTERNAL_STORAGE, Actions.Request.EXTERNAL_STORAGE);
                     operationID = Actions.Application.SAVE_IMAGE_IN_GALLERY;
                 } else {
                     saveInGallery();

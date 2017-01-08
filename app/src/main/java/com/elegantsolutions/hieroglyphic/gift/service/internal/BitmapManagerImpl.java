@@ -90,7 +90,6 @@ class BitmapManagerImpl implements BitmapManager {
         int currentY = 0;
 
         for (Bitmap bitmap:bitmaps) {
-
             canvas.drawBitmap(bitmap, 0, currentY + spacing, null);
 
             currentY += bitmap.getHeight();

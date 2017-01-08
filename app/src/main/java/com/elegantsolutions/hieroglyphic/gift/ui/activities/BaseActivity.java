@@ -13,7 +13,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -51,6 +50,10 @@ import rx.Observable;
 
 public class BaseActivity extends ActionBarActivity {
     private static final String TAG = BaseActivity.class.getSimpleName();
+    private static final String FONTS_FFF_TUSJ_TTF = "fonts/FFF_Tusj.ttf";
+
+    public static final int ANDROID_6 = 23;
+
     private AdView adView;
     private ProgressDialog dialog;
 
@@ -142,23 +145,18 @@ public class BaseActivity extends ActionBarActivity {
             adRequest = new AdRequest.Builder().build();
         }
 
-        //TODO uncomment two lines
         //.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)       // Emulator
         //.addTestDevice("B3EEABB8EE11C2BE770B684D95219ECB") // My Galaxy Nexus test phone
         // Load the adView with the ad request.
         adView.loadAd(adRequest);
     }
 
-    protected void requestPermission(Activity activity, String[] permissions, int requestCode) {
-        Log.d(TAG, "Inside requestPermission()");
-
-        //TODO use checkselfpermission result
-        for (String permission : permissions) {
-            ContextCompat.checkSelfPermission(this, permission);
-        }
+    protected void requestPermissions(Activity activity, String[] permissions, int requestCode) {
+        Log.d(TAG, "In requestPermissions()");
 
         ActivityCompat.requestPermissions(activity, permissions, requestCode);
-        Log.d(TAG, "After requestPermission() completes!!!");
+
+        Log.d(TAG, "requestPermissions() completes");
     }
 
     protected void showPhotoOptions(View view) {
@@ -257,7 +255,7 @@ public class BaseActivity extends ActionBarActivity {
     }
 
     protected void displayUserName(TextView userNameView, String userName) {
-        Typeface type = Typeface.createFromAsset(getAssets(),"fonts/FFF_Tusj.ttf");
+        Typeface type = Typeface.createFromAsset(getAssets(), FONTS_FFF_TUSJ_TTF);
 
         userNameView.setTypeface(type);
         userNameView.setText(userName);
@@ -368,7 +366,9 @@ public class BaseActivity extends ActionBarActivity {
     protected void hideSoftKeyboard(Activity activity) {
         InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
 
-        inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
+        if (inputMethodManager != null && activity.getCurrentFocus() != null) {
+            inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
+        }
     }
 
     protected void registerHideSoftKeyboardEvent(View view, final Activity activity) {

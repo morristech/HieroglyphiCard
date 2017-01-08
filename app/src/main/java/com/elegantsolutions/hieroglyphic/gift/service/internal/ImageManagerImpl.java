@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.elegantsolutions.hieroglyphic.gift.service.BitmapManager;
 import com.elegantsolutions.hieroglyphic.gift.service.ImageManager;
-import com.elegantsolutions.hieroglyphic.gift.service.MeasurementManager;
+import com.elegantsolutions.hieroglyphic.gift.service.PhotoMeasurementManager;
 import com.elegantsolutions.hieroglyphic.gift.ui.activities.MainActivity;
 
 import java.io.File;
@@ -25,9 +25,9 @@ class ImageManagerImpl implements ImageManager {
     private static final String TAG = ImageManagerImpl.class.getSimpleName();
 
     private BitmapManager bitmapManager;
-    private MeasurementManager measurementManager;
+    private PhotoMeasurementManager measurementManager;
 
-    public ImageManagerImpl(BitmapManager bitmapManager, MeasurementManager measurementManager) {
+    public ImageManagerImpl(BitmapManager bitmapManager, PhotoMeasurementManager measurementManager) {
         this.bitmapManager = bitmapManager;
         this.measurementManager = measurementManager;
     }
@@ -88,8 +88,8 @@ class ImageManagerImpl implements ImageManager {
             height = maximumHeight;
         }
 
-        Log.i(TAG, "Width = " + width);
-        Log.i(TAG, "Height = " + height);
+        Log.i(TAG, "Reduced Width = " + width);
+        Log.i(TAG, "Reduced Height = " + height);
 
         imageView.setImageBitmap(Bitmap.createScaledBitmap(src, width, height, false));
     }

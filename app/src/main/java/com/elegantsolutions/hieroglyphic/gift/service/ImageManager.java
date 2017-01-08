@@ -3,9 +3,6 @@ package com.elegantsolutions.hieroglyphic.gift.service;
 import android.app.Activity;
 import android.graphics.Bitmap;
 
-/**
- * Created by hazemsaleh on 1/5/17.
- */
 public interface ImageManager {
     void showImage(Activity activity, int ID, String photoPath);
 

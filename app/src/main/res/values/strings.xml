@@ -11,6 +11,7 @@
     <string name="from_camera">From Camera</string>
     <string name="from_gallery">From Gallery</string>
     <string name="selected_photo">Selected Photo</string>
+    <string name="hiero_chars">Hieroglyphic Characters</string>
     <string name="title_activity_card">Enjoy your Card</string>
     <string name="image_desc">Click the image below to select your Photo</string>
     <string name="menu_Rate_app">Rate this app</string>

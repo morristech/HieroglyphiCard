@@ -20,21 +20,35 @@
 
 		    <ImageView 
 		        android:id="@+id/photoView"
-                android:layout_height="wrap_content"
-                android:layout_width="fill_parent"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
+
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:scaleType="fitCenter"
+				android:adjustViewBounds="true"
+				android:layout_gravity="center"
+				android:gravity="center_horizontal"
+
+				android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
-		    	android:contentDescription="@string/selected_photo"/>       
-		    	
-		    <ImageView
+		    	android:contentDescription="@string/selected_photo"/>
+            <!--
+android:layout_height="wrap_content"
+android:layout_width="fill_parent"
+-->
+            <ImageView
 		        android:layout_marginTop="10dp"
                 android:id="@+id/heroView"
+
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_width="fill_parent"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:layout_gravity="center"
+                android:gravity="center_horizontal"
+
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
-                android:scaleType="fitCenter"
-		    	android:contentDescription="@string/selected_photo"/>
+		    	android:contentDescription="@string/hiero_chars"/>
 		    	
 			<TextView
 		        android:layout_marginTop="10dp"

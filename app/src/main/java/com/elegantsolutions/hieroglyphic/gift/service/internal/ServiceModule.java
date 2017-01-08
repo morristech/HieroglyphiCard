@@ -4,7 +4,7 @@ import com.elegantsolutions.hieroglyphic.gift.service.BitmapManager;
 import com.elegantsolutions.hieroglyphic.gift.service.GalleryManager;
 import com.elegantsolutions.hieroglyphic.gift.service.HieroManager;
 import com.elegantsolutions.hieroglyphic.gift.service.ImageManager;
-import com.elegantsolutions.hieroglyphic.gift.service.MeasurementManager;
+import com.elegantsolutions.hieroglyphic.gift.service.PhotoMeasurementManager;
 import com.elegantsolutions.hieroglyphic.gift.service.ProgressManager;
 import com.elegantsolutions.hieroglyphic.gift.service.ShareManager;
 
@@ -36,13 +36,13 @@ public class ServiceModule {
 
     @Provides
     @Singleton
-    ImageManager provideImageManager(BitmapManager bitmapManager, MeasurementManager measurementManager) {
+    ImageManager provideImageManager(BitmapManager bitmapManager, PhotoMeasurementManager measurementManager) {
         return new ImageManagerImpl(bitmapManager, measurementManager);
     }
 
     @Provides
     @Singleton
-    MeasurementManager provideMeasurementManager() {
+    PhotoMeasurementManager provideMeasurementManager() {
         return new MeasurementManagerImpl();
     }
 

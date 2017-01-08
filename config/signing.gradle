@@ -1,0 +1,10 @@
+android {
+    signingConfigs {
+        config {
+            keyAlias 'pharaoh card'
+            keyPassword 'password'
+            storeFile file('../signing/myKeystore')
+            storePassword 'password'
+        }
+    }
+}

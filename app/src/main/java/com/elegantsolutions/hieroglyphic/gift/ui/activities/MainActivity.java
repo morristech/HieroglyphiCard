@@ -32,6 +32,8 @@ import static com.elegantsolutions.hieroglyphic.gift.R.id.userName;
 
 public class MainActivity extends BaseActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
+    private static final String JPG_EXT = ".jpg";
+
     private String photoPath;
 
     @Inject
@@ -73,8 +75,6 @@ public class MainActivity extends BaseActivity {
 
     @OnClick(R.id.createCard)
     public void onCreateCard() {
-        System.out.println("onCreateCard() clicked ...");
-
         String userName = userNameField.getText().toString().trim();
 
         if (TextUtils.isEmpty(userName)) {
@@ -106,17 +106,19 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void pickPhotoFromGallery() {
-    	Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-
-    	startActivityForResult(intent, Actions.Application.LOAD_IMAGE_FROM_GALLERY);
+        if(Build.VERSION.SDK_INT >= ANDROID_6) {
+            requestPermissions(this, Actions.Permission.READ_WRITE_EXTERNAL_STORAGE, Actions.Request.EXTERNAL_STORAGE);
+        } else {
+            pickImage();
+        }
     }
 
     @Override
     protected void pickPhotoFromCamera() {
-        photoPath = galleryManager.getGalleryPath() + System.currentTimeMillis() + ".jpg";
+        photoPath = galleryManager.getGalleryPath() + System.currentTimeMillis() + JPG_EXT;
 
-        if(Build.VERSION.SDK_INT >= 23) {
-            requestPermission(this, Actions.Permission.READ_WRITE_EXTERNAL_STORAGE, Actions.Request.EXTERNAL_STORAGE);
+        if(Build.VERSION.SDK_INT >= ANDROID_6) {
+            requestPermissions(this, Actions.Permission.FULL_CAMERA_STORAGE, Actions.Request.FULL_CAMERA_STORAGE_ACCESS);
         } else {
             captureImage();
         }
@@ -124,25 +126,36 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        Log.d(TAG, "Inside onRequestPermissionsResult(). request code = " + requestCode);
+        Log.d(TAG, "In onRequestPermissionsResult() and request code = " + requestCode);
 
         switch (requestCode) {
             case Actions.Request.EXTERNAL_STORAGE: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Log.d(TAG, "Storage Permission granted. Requesting Camera Permission");
-                    requestPermission(this, Actions.Permission.CAMERA, Actions.Request.CAMERA_ACCESS);
+                    Log.d(TAG, "Storage Permission granted");
+                    pickImage();
                 } else {
                     Log.d(TAG, "Storage Permission denied");
                 }
                 return;
             }
-
-            case Actions.Request.CAMERA_ACCESS:
+            case Actions.Request.CAMERA_ACCESS: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Log.d(TAG, "Camera Permission is granted");
                     captureImage();
                 } else {
                     Log.d(TAG, "Camera Permission denied");
                 }
+                return;
+            }
+            case Actions.Request.FULL_CAMERA_STORAGE_ACCESS: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Log.d(TAG, "Camera + Disk Permission is granted");
+                    captureImage();
+                } else {
+                    Log.d(TAG, "Camera + Disk Permission denied");
+                }
+                return;
+            }
         }
     }
 
@@ -183,6 +196,12 @@ public class MainActivity extends BaseActivity {
 		}
 	}
 
+    private void pickImage() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+        startActivityForResult(intent, Actions.Application.LOAD_IMAGE_FROM_GALLERY);
+    }
+
     private void captureImage() {
         File photoFile = new File(photoPath);
 
@@ -198,8 +217,6 @@ public class MainActivity extends BaseActivity {
 
             return;
         }
-
-        Log.d(TAG, "Camera Permission granted");
 
         Uri outputFileUri = Uri.fromFile(photoFile);
 
