@@ -2,43 +2,46 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.elegantsolutions.hieroglyphic.gift"
     android:versionCode="6"
-    android:versionName="1.5" >
+    android:versionName="1.5">
 
     <uses-sdk
         android:minSdkVersion="9"
         android:targetSdkVersion="22" />
-    
-	<supports-screens
-    	android:anyDensity="true"
-    	android:largeScreens="true"
-    	android:normalScreens="true"
-    	android:resizeable="true"
-    	android:smallScreens="true"
-    	android:xlargeScreens="true" />  
- 
-	<uses-feature android:name="android.hardware.camera" android:required="false"/>	
-	
-	<uses-permission android:name="android.permission.CAMERA" />
-	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />    
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:resizeable="true"
+        android:smallScreens="true"
+        android:xlargeScreens="true" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:allowBackup="true" 
+        android:name=".di.HieroApplication"
+        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-		android:name=".di.HieroApplication"
         android:label="@string/app_name"
-        android:theme="@style/Theme.AppCompat.Light.DarkActionBar" >
-        
-		<meta-data android:name="com.google.android.gms.version"
-           		   android:value="@integer/google_play_services_version" />        
-        
+        android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
         <activity
             android:name=".ui.activities.MainActivity"
-            android:windowSoftInputMode="stateUnchanged|adjustResize"
+            android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:label="@string/app_name" >
+            android:windowSoftInputMode="stateUnchanged|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -48,13 +51,13 @@
 
         <activity
             android:name=".ui.activities.CardActivity"
-            android:windowSoftInputMode="stateUnchanged|adjustResize"
+            android:label="@string/title_activity_card"
             android:screenOrientation="portrait"
-            android:label="@string/title_activity_card" >
-        </activity>
-	        
-	    <activity android:name="com.google.android.gms.ads.AdActivity"
-             	  android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>        
+            android:windowSoftInputMode="stateUnchanged|adjustResize"></activity>
+
+        <activity
+            android:name="com.google.android.gms.ads.AdActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
     </application>
 
 </manifest>

@@ -30,7 +30,7 @@ class ShareManagerImpl implements ShareManager {
                 if (info.activityInfo.packageName.toLowerCase().contains(type) ||
                         info.activityInfo.name.toLowerCase().contains(type)) {
 
-                    share.putExtra(Intent.EXTRA_SUBJECT,  activity.getString(R.string.hieroglyphic_name_share_message));
+                    share.putExtra(Intent.EXTRA_SUBJECT, activity.getString(R.string.hieroglyphic_name_share_message));
                     share.putExtra(Intent.EXTRA_TEXT, activity.getString(R.string.checkout_name_message));
 
                     File file = new File(imagePath);

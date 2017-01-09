@@ -47,11 +47,9 @@ class ImageManagerImpl implements ImageManager {
 
             if (orientation == 6) {
                 matrix.postRotate(90);
-            }
-            else if (orientation == 3) {
+            } else if (orientation == 3) {
                 matrix.postRotate(180);
-            }
-            else if (orientation == 8) {
+            } else if (orientation == 8) {
                 matrix.postRotate(270);
             }
         } catch (IOException e) {
@@ -82,7 +80,7 @@ class ImageManagerImpl implements ImageManager {
         int maximumHeight = measurementManager.getProperMaximumHeight(activity);
 
         if (height > maximumHeight) {
-            double newWidth = ((double) src.getWidth()/src.getHeight()) * maximumHeight;
+            double newWidth = ((double) src.getWidth() / src.getHeight()) * maximumHeight;
 
             width = (int) newWidth;
             height = maximumHeight;

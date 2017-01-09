@@ -129,7 +129,7 @@ public class BaseActivity extends ActionBarActivity {
 
         // Lookup your LinearLayout assuming it's been given
         // the attribute android:id="@+id/mainLayout".
-        LinearLayout layout = (LinearLayout)findViewById(R.id.layoutForScroll);
+        LinearLayout layout = (LinearLayout) findViewById(R.id.layoutForScroll);
 
         // Add the adView to it.
         layout.addView(adView, 0);
@@ -194,7 +194,7 @@ public class BaseActivity extends ActionBarActivity {
         String photoPath;
         Uri selectedImage = data.getData();
 
-        String[] filePathColumn = { MediaStore.Images.Media.DATA };
+        String[] filePathColumn = {MediaStore.Images.Media.DATA};
 
         Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
 
@@ -268,12 +268,12 @@ public class BaseActivity extends ActionBarActivity {
 
     protected void goToAppRate() {
         Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse("market://details?id="+getPackageName()));
+        intent.setData(Uri.parse("market://details?id=" + getPackageName()));
 
         if (myStartActivity(intent) == false) {
 
             //Market (Google play) app seems not installed, let's try to open a web-browser
-            intent.setData(Uri.parse("https://play.google.com/store/apps/details?id="+  getPackageName()));
+            intent.setData(Uri.parse("https://play.google.com/store/apps/details?id=" + getPackageName()));
 
             if (myStartActivity(intent) == false) {
 
@@ -283,7 +283,7 @@ public class BaseActivity extends ActionBarActivity {
         }
     }
 
-    protected String getUniqueImgName (String userName) {
+    protected String getUniqueImgName(String userName) {
         String photoName = userName.split("\\s+")[0];
 
         return photoName + "." + System.currentTimeMillis() + ".png";

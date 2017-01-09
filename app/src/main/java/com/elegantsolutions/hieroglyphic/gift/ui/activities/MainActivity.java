@@ -82,7 +82,7 @@ public class MainActivity extends BaseActivity {
             return;
         }
 
-        if (! hieroManager.isValidEnglishName(userName)) {
+        if (!hieroManager.isValidEnglishName(userName)) {
             Toast.makeText(MainActivity.this, R.string.name_should_be_english_message, Toast.LENGTH_SHORT).show();
             return;
         }
@@ -106,7 +106,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void pickPhotoFromGallery() {
-        if(Build.VERSION.SDK_INT >= ANDROID_6) {
+        if (Build.VERSION.SDK_INT >= ANDROID_6) {
             requestPermissions(this, Actions.Permission.READ_WRITE_EXTERNAL_STORAGE, Actions.Request.EXTERNAL_STORAGE);
         } else {
             pickImage();
@@ -117,7 +117,7 @@ public class MainActivity extends BaseActivity {
     protected void pickPhotoFromCamera() {
         photoPath = galleryManager.getGalleryPath() + System.currentTimeMillis() + JPG_EXT;
 
-        if(Build.VERSION.SDK_INT >= ANDROID_6) {
+        if (Build.VERSION.SDK_INT >= ANDROID_6) {
             requestPermissions(this, Actions.Permission.FULL_CAMERA_STORAGE, Actions.Request.FULL_CAMERA_STORAGE_ACCESS);
         } else {
             captureImage();
@@ -160,12 +160,12 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(resultCode != RESULT_OK){
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode != RESULT_OK) {
             return;
         }
 
-        if (requestCode == Actions.Application.LOAD_IMAGE_FROM_GALLERY &&  data != null) {
+        if (requestCode == Actions.Application.LOAD_IMAGE_FROM_GALLERY && data != null) {
             photoPath = loadImage(data);
         } else if (requestCode == Actions.Application.CAPTURE_IMAGE_FROM_CAMERA) {
             Log.d(MainActivity.class.toString(), "Photo is saved");
@@ -177,24 +177,24 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-	protected void onRestoreInstanceState(Bundle savedInstanceState) {		
-		super.onRestoreInstanceState(savedInstanceState);
-		
-		photoPath = savedInstanceState.getString(Actions.Param.PHOTO_PATH);
-		
-		if (photoPath != null) {
-            showImage(R.id.cardPhoto, photoPath);
-		}
-	}
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
 
-	@Override
-	protected void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-		
-		if (photoPath != null) {
-			outState.putString(Actions.Param.PHOTO_PATH, photoPath);
-		}
-	}
+        photoPath = savedInstanceState.getString(Actions.Param.PHOTO_PATH);
+
+        if (photoPath != null) {
+            showImage(R.id.cardPhoto, photoPath);
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        if (photoPath != null) {
+            outState.putString(Actions.Param.PHOTO_PATH, photoPath);
+        }
+    }
 
     private void pickImage() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);

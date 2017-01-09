@@ -42,7 +42,7 @@ class BitmapManagerImpl implements BitmapManager {
         int totalWidth = 0;
         int totalHeight = bitmaps[0].getHeight();
 
-        for (Bitmap bitmap:bitmaps) {
+        for (Bitmap bitmap : bitmaps) {
             totalWidth += bitmap.getWidth();
         }
 
@@ -54,7 +54,7 @@ class BitmapManagerImpl implements BitmapManager {
 
         int currentX = 0;
 
-        for (Bitmap bitmap:bitmaps) {
+        for (Bitmap bitmap : bitmaps) {
 
             canvas.drawBitmap(bitmap, currentX, 0, null);
 
@@ -73,7 +73,7 @@ class BitmapManagerImpl implements BitmapManager {
         int totalWidth = bitmaps[0].getWidth();
         int totalHeight = 0;
 
-        for (Bitmap bitmap:bitmaps) {
+        for (Bitmap bitmap : bitmaps) {
             totalHeight += bitmap.getHeight();
 
             if (totalWidth < bitmap.getWidth()) {
@@ -89,7 +89,7 @@ class BitmapManagerImpl implements BitmapManager {
 
         int currentY = 0;
 
-        for (Bitmap bitmap:bitmaps) {
+        for (Bitmap bitmap : bitmaps) {
             canvas.drawBitmap(bitmap, 0, currentY + spacing, null);
 
             currentY += bitmap.getHeight();
@@ -105,7 +105,7 @@ class BitmapManagerImpl implements BitmapManager {
         final int totalHeight = view.getChildAt(0).getHeight();
         final int totalWidth = view.getChildAt(0).getWidth();
 
-        Bitmap returnedBitmap = Bitmap.createBitmap(totalWidth, totalHeight , Bitmap.Config.ARGB_8888);
+        Bitmap returnedBitmap = Bitmap.createBitmap(totalWidth, totalHeight, Bitmap.Config.ARGB_8888);
         final Canvas canvas = new Canvas(returnedBitmap);
 
         activity.runOnUiThread(new Runnable() {
@@ -116,7 +116,7 @@ class BitmapManagerImpl implements BitmapManager {
 
                 Drawable clone = bgDrawable.getConstantState().newDrawable();
 
-                bgDrawable.setBounds(0,0, totalWidth, totalHeight);
+                bgDrawable.setBounds(0, 0, totalWidth, totalHeight);
 
                 if (bgDrawable != null) {
                     bgDrawable.draw(canvas);

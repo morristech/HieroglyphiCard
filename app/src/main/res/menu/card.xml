@@ -3,45 +3,46 @@
 
     <item
         android:id="@+id/menu_overflow"
-        app:showAsAction="always"
         android:icon="@drawable/ic_action_overflow"
-        android:title="@string/container_menu">
+        android:title="@string/container_menu"
+        app:showAsAction="always">
 
         <menu>
             <item
                 android:id="@+id/save_in_gallery"
                 android:orderInCategory="100"
-                app:showAsAction="never"
-                android:title="@string/save_in_pictures"/>
+                android:title="@string/save_in_pictures"
+                app:showAsAction="never" />
 
             <item
                 android:id="@+id/share_on_fb"
                 android:orderInCategory="100"
-                app:showAsAction="never"
-                android:title="@string/share_on_facebook"/>
+                android:title="@string/share_on_facebook"
+                app:showAsAction="never" />
 
             <item
-               android:id="@+id/share_on_twitter"
-               android:orderInCategory="100"
-                app:showAsAction="never"
-               android:title="@string/share_on_twitter"/>
+                android:id="@+id/share_on_twitter"
+                android:orderInCategory="100"
+                android:title="@string/share_on_twitter"
+                app:showAsAction="never" />
 
             <item
-               android:id="@+id/share_on_google_plus"
-               android:orderInCategory="100"
-                app:showAsAction="never"
-               android:title="@string/share_on_google"/>
+                android:id="@+id/share_on_google_plus"
+                android:orderInCategory="100"
+                android:title="@string/share_on_google"
+                app:showAsAction="never" />
 
             <item
-               android:id="@+id/send_to_friend"
-               android:orderInCategory="100"
-                app:showAsAction="never"
-               android:title="@string/send_to_a_friend"/>
+                android:id="@+id/send_to_friend"
+                android:orderInCategory="100"
+                android:title="@string/send_to_a_friend"
+                app:showAsAction="never" />
 
-            <item android:id="@+id/rate_App"
-               android:orderInCategory="100"
-                app:showAsAction="never"
-               android:title="@string/rate_this_app"/>
+            <item
+                android:id="@+id/rate_App"
+                android:orderInCategory="100"
+                android:title="@string/rate_this_app"
+                app:showAsAction="never" />
         </menu>
     </item>
 

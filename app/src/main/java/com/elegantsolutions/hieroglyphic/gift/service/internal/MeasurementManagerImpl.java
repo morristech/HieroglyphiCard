@@ -12,7 +12,7 @@ class MeasurementManagerImpl implements PhotoMeasurementManager {
     public boolean isTablet(Activity activity) {
         TelephonyManager manager = (TelephonyManager) activity.getSystemService(Context.TELEPHONY_SERVICE);
 
-        if (manager.getPhoneType() == TelephonyManager.PHONE_TYPE_NONE){
+        if (manager.getPhoneType() == TelephonyManager.PHONE_TYPE_NONE) {
             return true;
         } else {
             return false;

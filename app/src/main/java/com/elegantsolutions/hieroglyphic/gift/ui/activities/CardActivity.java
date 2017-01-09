@@ -39,9 +39,9 @@ public class CardActivity extends BaseActivity {
     @BindView(R.id.userNameView)
     TextView userNameField;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
         //inject dependencies
         ((HieroApplication) getApplication()).getAppComponent().inject(this);
@@ -55,68 +55,68 @@ public class CardActivity extends BaseActivity {
 
         //TODO convert to snack
         showLongMessage(getString(R.string.procedure_message));
-	}
+    }
 
     @Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.card, menu);
-		
-		return true;
-	}
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.card, menu);
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-	        case R.id.share_on_fb:
-                if(Build.VERSION.SDK_INT >= ANDROID_6) {
+            case R.id.share_on_fb:
+                if (Build.VERSION.SDK_INT >= ANDROID_6) {
                     requestPermissions(this, Actions.Permission.READ_WRITE_EXTERNAL_STORAGE, Actions.Request.EXTERNAL_STORAGE);
                     operationID = Actions.Application.SHARE_IMAGE_FB;
                 } else {
                     shareImage(ShareOptions.FACEBOOK);
                 }
-	            return true;
-	        case R.id.share_on_twitter:
-                if(Build.VERSION.SDK_INT >= ANDROID_6) {
+                return true;
+            case R.id.share_on_twitter:
+                if (Build.VERSION.SDK_INT >= ANDROID_6) {
                     requestPermissions(this, Actions.Permission.READ_WRITE_EXTERNAL_STORAGE, Actions.Request.EXTERNAL_STORAGE);
                     operationID = Actions.Application.SHARE_IMAGE_TWITTER;
                 } else {
                     shareImage(ShareOptions.TWITTER);
                 }
-	            return true;
-	        case R.id.share_on_google_plus:
-                if(Build.VERSION.SDK_INT >= ANDROID_6) {
+                return true;
+            case R.id.share_on_google_plus:
+                if (Build.VERSION.SDK_INT >= ANDROID_6) {
                     requestPermissions(this, Actions.Permission.READ_WRITE_EXTERNAL_STORAGE, Actions.Request.EXTERNAL_STORAGE);
                     operationID = Actions.Application.SHARE_IMAGE_GPLUS;
                 } else {
                     shareImage(ShareOptions.GPLUS);
                 }
-	            return true;
-	        case R.id.send_to_friend:
-                if(Build.VERSION.SDK_INT >= ANDROID_6) {
+                return true;
+            case R.id.send_to_friend:
+                if (Build.VERSION.SDK_INT >= ANDROID_6) {
                     requestPermissions(this, Actions.Permission.READ_WRITE_EXTERNAL_STORAGE, Actions.Request.EXTERNAL_STORAGE);
                     operationID = Actions.Application.SHARE_IMAGE_EMAIL;
                 } else {
                     shareImage(ShareOptions.GMAIL);
                 }
-	            return true;
-	        //case R.id.set_as_wallpaper:
-	        //	setViewAsWallpaper();
-	        //	return true;
-	        case R.id.save_in_gallery:
-                if(Build.VERSION.SDK_INT >= ANDROID_6) {
+                return true;
+            //case R.id.set_as_wallpaper:
+            //	setViewAsWallpaper();
+            //	return true;
+            case R.id.save_in_gallery:
+                if (Build.VERSION.SDK_INT >= ANDROID_6) {
                     requestPermissions(this, Actions.Permission.READ_WRITE_EXTERNAL_STORAGE, Actions.Request.EXTERNAL_STORAGE);
                     operationID = Actions.Application.SAVE_IMAGE_IN_GALLERY;
                 } else {
                     saveInGallery();
                 }
-	    		return true;
-	        case R.id.rate_App:
-	        	goToAppRate();
-	        	return true;
-	    }
-	    
-	    return true;
-	}
+                return true;
+            case R.id.rate_App:
+                goToAppRate();
+                return true;
+        }
+
+        return true;
+    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
@@ -150,22 +150,22 @@ public class CardActivity extends BaseActivity {
             }
         }
     }
-	
-	@Override
-	protected void onRestoreInstanceState(Bundle savedInstanceState) {		
-		super.onRestoreInstanceState(savedInstanceState);
-		
-		currentImageName = savedInstanceState.getString("currentImageName");
-	}
 
-	@Override
-	protected void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-		
-		if (currentImageName != null) {
-			outState.putString("currentImageName", currentImageName);
-		}
-	}
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        currentImageName = savedInstanceState.getString("currentImageName");
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        if (currentImageName != null) {
+            outState.putString("currentImageName", currentImageName);
+        }
+    }
 
     private void shareImage(final String type) {
         showBusyIndicator();
@@ -213,14 +213,14 @@ public class CardActivity extends BaseActivity {
                         showLongMessage(getString(R.string.done_successfully_message));
                     }
                 });
-	}
+    }
 
     private void saveInGallery() {
-		if (currentImageName != null) {
-			showShortMessage(getString(R.string.image_saved_app) +
+        if (currentImageName != null) {
+            showShortMessage(getString(R.string.image_saved_app) +
                     galleryManager.getAppGalleryPath() + currentImageName);
-			return;
-		}
+            return;
+        }
 
         showBusyIndicator();
 
@@ -253,7 +253,7 @@ public class CardActivity extends BaseActivity {
                                 currentImageName);
                     }
                 });
-	}
+    }
 
     private void displayCardInformation() {
         Intent intent = getIntent();

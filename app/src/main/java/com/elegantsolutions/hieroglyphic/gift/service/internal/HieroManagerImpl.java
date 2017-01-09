@@ -60,11 +60,11 @@ class HieroManagerImpl implements HieroManager {
         name = name.replaceAll("z", R.drawable.z + CHAR_SEP);
 
         // Prepare the arrays
-        String []words = name.split("\\" + WORD_SEP);
+        String[] words = name.split("\\" + WORD_SEP);
         List<int[]> wordList = new ArrayList<int[]>();
 
 
-        for (String word:words) {
+        for (String word : words) {
             Log.d(TAG, "Word = " + word);
 
             String[] chars = word.split("\\" + CHAR_SEP);
@@ -74,7 +74,7 @@ class HieroManagerImpl implements HieroManager {
             int[] partInts = new int[chars.length];
 
             for (int i = 0; i < chars.length; ++i) {
-                Log.d(TAG, "chars["+i+"] = " + chars[i]);
+                Log.d(TAG, "chars[" + i + "] = " + chars[i]);
 
                 partInts[i] = Integer.parseInt(chars[i]);
             }

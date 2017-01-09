@@ -14,6 +14,8 @@ import dagger.Component;
 @Component(modules = {AppModule.class, ServiceModule.class})
 public interface AppComponent {
     void inject(BaseActivity baseActivity);
+
     void inject(MainActivity mainActivity);
+
     void inject(CardActivity cardActivity);
 }
