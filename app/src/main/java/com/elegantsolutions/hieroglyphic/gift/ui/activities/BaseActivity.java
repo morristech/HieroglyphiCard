@@ -22,12 +22,11 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.elegantsolutions.hieroglyphic.gift.BuildConfig;
 import com.elegantsolutions.hieroglyphic.gift.R;
+import com.elegantsolutions.hieroglyphic.gift.ads.helper.ActivityAdsHelper;
 import com.elegantsolutions.hieroglyphic.gift.di.HieroApplication;
 import com.elegantsolutions.hieroglyphic.gift.service.BitmapManager;
 import com.elegantsolutions.hieroglyphic.gift.service.GalleryManager;
@@ -36,10 +35,6 @@ import com.elegantsolutions.hieroglyphic.gift.service.ImageManager;
 import com.elegantsolutions.hieroglyphic.gift.service.ProgressManager;
 import com.elegantsolutions.hieroglyphic.gift.ui.helper.Actions;
 import com.elegantsolutions.hieroglyphic.gift.ui.helper.ShareOptions;
-import com.google.analytics.tracking.android.EasyTracker;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
-import com.google.android.gms.ads.AdView;
 
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -49,12 +44,11 @@ import javax.inject.Inject;
 import rx.Observable;
 
 public class BaseActivity extends ActionBarActivity {
+    public static final int ANDROID_6 = 23;
     private static final String TAG = BaseActivity.class.getSimpleName();
     private static final String FONTS_FFF_TUSJ_TTF = "fonts/FFF_Tusj.ttf";
 
-    public static final int ANDROID_6 = 23;
-
-    private AdView adView;
+    private ActivityAdsHelper activityAdsHelper;
     private ProgressDialog dialog;
 
     @Inject
@@ -78,28 +72,31 @@ public class BaseActivity extends ActionBarActivity {
 
         //inject dependencies
         ((HieroApplication) getApplication()).getAppComponent().inject(this);
+
+        // Initialize Ads component
+        activityAdsHelper = new ActivityAdsHelper(this);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        if (adView != null) {
-            EasyTracker.getInstance(this).activityStart(this);  // Add this method.
+        if (activityAdsHelper != null) {
+            activityAdsHelper.onStart();
         }
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        if (adView != null) {
-            EasyTracker.getInstance(this).activityStop(this);  // Add this method.
+        if (activityAdsHelper != null) {
+            activityAdsHelper.onStop();
         }
     }
 
     @Override
     public void onPause() {
-        if (adView != null) {
-            adView.pause();
+        if (activityAdsHelper != null) {
+            activityAdsHelper.onPause();
         }
         super.onPause();
     }
@@ -107,48 +104,32 @@ public class BaseActivity extends ActionBarActivity {
     @Override
     public void onResume() {
         super.onResume();
-        if (adView != null) {
-            adView.resume();
+        if (activityAdsHelper != null) {
+            activityAdsHelper.onResume();
         }
     }
 
     @Override
     public void onDestroy() {
-        if (adView != null) {
-            adView.destroy();
+        if (activityAdsHelper != null) {
+            activityAdsHelper.onDestroy();
         }
+
+        activityAdsHelper = null;
+
         super.onDestroy();
     }
 
-    protected void setupAdvertisement() {
-        adView = new AdView(this);
+    protected void setupAdsBanner(int containerID) {
+        activityAdsHelper.setupBannerAds(containerID);
+    }
 
-        // Ads configs
-        adView.setAdUnitId(BuildConfig.ADS_UNIT_ID);
-        adView.setAdSize(AdSize.BANNER);
+    protected void setupInterstitialAds() {
+        activityAdsHelper.setupInterstitialAds();
+    }
 
-        // Lookup your LinearLayout assuming it's been given
-        // the attribute android:id="@+id/mainLayout".
-        LinearLayout layout = (LinearLayout) findViewById(R.id.layoutForScroll);
-
-        // Add the adView to it.
-        layout.addView(adView, 0);
-
-        // Initiate a generic request.
-        AdRequest adRequest;
-
-        if (BuildConfig.ENABLE_EMULATOR_TEST_ADS) {
-            adRequest = new AdRequest.Builder()
-                    .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                    .build();
-        } else {
-            adRequest = new AdRequest.Builder().build();
-        }
-
-        //.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)       // Emulator
-        //.addTestDevice("B3EEABB8EE11C2BE770B684D95219ECB") // My Galaxy Nexus test phone
-        // Load the adView with the ad request.
-        adView.loadAd(adRequest);
+    protected void displayInterstitialAd() {
+        activityAdsHelper.displayInterstitialAd();
     }
 
     protected void requestPermissions(Activity activity, String[] permissions, int requestCode) {

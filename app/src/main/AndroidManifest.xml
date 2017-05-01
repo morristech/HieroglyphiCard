@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.elegantsolutions.hieroglyphic.gift"
-    android:versionCode="6"
-    android:versionName="1.5">
+    package="com.elegantsolutions.hieroglyphic.gift">
 
     <uses-sdk
         android:minSdkVersion="9"
@@ -27,7 +25,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:name=".di.HieroApplication"
+        android:name="com.elegantsolutions.hieroglyphic.gift.di.HieroApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -38,7 +36,7 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".ui.activities.MainActivity"
+            android:name="com.elegantsolutions.hieroglyphic.gift.ui.activities.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateUnchanged|adjustResize">
@@ -50,7 +48,7 @@
         </activity>
 
         <activity
-            android:name=".ui.activities.CardActivity"
+            android:name="com.elegantsolutions.hieroglyphic.gift.ui.activities.CardActivity"
             android:label="@string/title_activity_card"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateUnchanged|adjustResize"></activity>

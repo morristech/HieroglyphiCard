@@ -63,7 +63,7 @@ public class MainActivity extends BaseActivity {
 
         galleryManager.createAppGalleryDirectory();
 
-        setupAdvertisement();
+        setupAdsBanner(R.id.layoutForScroll);
 
         registerHideSoftKeyboardEvent(getWindow().getDecorView().getRootView(), this);
     }

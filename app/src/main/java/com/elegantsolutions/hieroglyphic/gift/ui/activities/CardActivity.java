@@ -53,8 +53,24 @@ public class CardActivity extends BaseActivity {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         displayCardInformation();
 
+        // setup Interstitial Ads
+        setupInterstitialAds();
+
         //TODO convert to snack
         showLongMessage(getString(R.string.procedure_message));
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        //https://techblog.badoo.com/blog/2014/08/28/android-handler-memory-leaks/
+        //handler.removeCallbacksAndMessages(null);
     }
 
     @Override
@@ -114,6 +130,10 @@ public class CardActivity extends BaseActivity {
                 goToAppRate();
                 return true;
         }
+
+        Log.i(TAG, "Displaying Interstitial Ad ...");
+
+        displayInterstitialAd();
 
         return true;
     }
